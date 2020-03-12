@@ -1,0 +1,3 @@
+/home/hykar/projects/pract/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/hykar/projects/pract/cmake-build-debug/CMakeFiles/pract.dir
+/home/hykar/projects/pract/cmake-build-debug/CMakeFiles/edit_cache.dir

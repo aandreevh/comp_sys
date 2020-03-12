@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hykar/projects/pract/include/base/Class.h
+string
+-
+typeindex
+-
+memory
+-
+compile_time/logical.h
+/home/hykar/projects/pract/include/base/compile_time/logical.h
+
+/home/hykar/projects/pract/include/base/ClassRegistry.h
+Class.h
+/home/hykar/projects/pract/include/base/Class.h
+
+/home/hykar/projects/pract/include/base/Factory.h
+unordered_map
+-
+functional
+-
+Class.h
+/home/hykar/projects/pract/include/base/Class.h
+ClassRegistry.h
+/home/hykar/projects/pract/include/base/ClassRegistry.h
+
+/home/hykar/projects/pract/include/base/compile_time/logical.h
+
+/home/hykar/projects/pract/main.cpp
+iostream
+-
+string_view
+-
+string
+-
+include/base/Class.h
+/home/hykar/projects/pract/include/base/Class.h
+include/base/Factory.h
+/home/hykar/projects/pract/include/base/Factory.h
+
