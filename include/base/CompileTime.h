@@ -2,13 +2,13 @@
 // Created by hykar on 10.03.20 г..
 //
 
-#ifndef GAMEO_LOGICAL_H
-#define GAMEO_LOGICAL_H
+#ifndef HYKR_LOGICAL_H
+#define HYKR_LOGICAL_H
 
 
 namespace base{
 
-    inline namespace logical {
+    inline namespace compile {
 
         template<bool P,bool Q>
         struct _and{
@@ -29,8 +29,23 @@ namespace base{
         struct _or<false,false>{
             static constexpr  bool value = false;
         };
+
+        template<typename... Args>
+         struct countArgs {
+            static const std::size_t  value = 0;
+        };
+
+        template<>
+        struct countArgs<> {
+            static const std::size_t  value = 0;
+        };
+
+        template<typename T, typename... Args>
+        struct countArgs<T, Args...> {
+            static constexpr std::size_t value = countArgs<Args...>::value+1;
+        };
     }
 
 
 }
-#endif //GAMEO_LOGICAL_H
+#endif //HYKR_LOGICAL_H

@@ -88,16 +88,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/hykar/projects/pract/include/base/Class.h">
-			<Option target="pract"/>
-		</Unit>
-		<Unit filename="/home/hykar/projects/pract/include/base/ClassRegistry.h">
+		<Unit filename="/home/hykar/projects/pract/include/base/CompileTime.h">
 			<Option target="pract"/>
 		</Unit>
 		<Unit filename="/home/hykar/projects/pract/include/base/Factory.h">
 			<Option target="pract"/>
 		</Unit>
-		<Unit filename="/home/hykar/projects/pract/include/base/compile_time/logical.h">
+		<Unit filename="/home/hykar/projects/pract/include/base/class/Class.h">
+			<Option target="pract"/>
+		</Unit>
+		<Unit filename="/home/hykar/projects/pract/include/base/class/ClassRegistry.h">
+			<Option target="pract"/>
+		</Unit>
+		<Unit filename="/home/hykar/projects/pract/include/base/stream/Stream.h">
 			<Option target="pract"/>
 		</Unit>
 		<Unit filename="/home/hykar/projects/pract/main.cpp">

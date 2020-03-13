@@ -2,30 +2,30 @@
 // Created by hykar on 11.03.20 г..
 //
 
-#ifndef GAMEO_CLASSREGISTRY_H
-#define GAMEO_CLASSREGISTRY_H
+#ifndef HYKR_CLASSREGISTRY_H
+#define HYKR_CLASSREGISTRY_H
 
 #include "Class.h"
 
 namespace base {
 
-    class BaseClassRegistry : public Class<BaseClassRegistry>{
+    class ClassRegistryBase : public Class<ClassRegistryBase>{
     public:
-       virtual ~BaseClassRegistry() = default;
+       virtual ~ClassRegistryBase() = default;
     };
 
-    template<typename _Base, typename _El,
-             typename _Cont = std::unordered_map<typename _Base::Type, _El, typename _Base::Type::hash>>
-    class ClassKeyRegistry : public BaseClassRegistry{
+    template<typename _Key, typename _El,
+             typename _Cont = std::unordered_map<typename _Key::Type, _El, typename _Key::Type::hash>>
+    class ClassKeyRegistry : public ClassRegistryBase{
     public:
-        using ClassBase = Class<_Base>;
+        using ClassBase = Class<_Key>;
         using Type = typename ClassBase::Type;
 
         class TypeNotFoundException : public std::exception {
         public:
 
             static constexpr const char *base() {
-                return typeid(_Base).name();
+                return typeid(_Key).name();
             }
 
             const char *what() const noexcept override {
@@ -50,7 +50,7 @@ namespace base {
         }
 
 
-        bool exists( Type type) const {
+        bool exists(const Type& type) const {
             return storage.find(type) != storage.end();
         }
 
@@ -87,7 +87,7 @@ namespace base {
     };
 
     template<typename _Base>
-    class ClassRegistry : public BaseClassRegistry{
+    class ClassRegistry : public ClassRegistryBase{
     public:
         using ClassBase = Class<_Base>;
         using ClassPtr = typename ClassBase::ClassPtr;
@@ -97,7 +97,6 @@ namespace base {
         Registry registry;
 
     public:
-
         const ClassPtr& get(const Type &type) const {
             return registry.get(type);
         }
@@ -147,4 +146,4 @@ namespace base {
     };
 }
 
-#endif //GAMEO_CLASSREGISTRY_H
+#endif //HYKR_CLASSREGISTRY_H

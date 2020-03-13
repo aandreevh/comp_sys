@@ -2,18 +2,18 @@
 // Created by hykar on 9.03.20 г..
 //
 
-#ifndef GAMEO_FACTORY_H
-#define GAMEO_FACTORY_H
+#ifndef HYKR_FACTORY_H
+#define HYKR_FACTORY_H
 
 #include <unordered_map>
 #include <functional>
 
-#include "Class.h"
-#include "ClassRegistry.h"
+#include "class/Class.h"
+#include "class/ClassRegistry.h"
 
 namespace base {
 
-    inline namespace cls {
+    inline namespace factory {
 
         class ClassFactoryBase : public Class<ClassFactoryBase> {
         public:
@@ -46,9 +46,9 @@ namespace base {
         };
 
 
-        class FactroyContext : public ClassRegistry<ClassFactoryBase> {};
+        class FactoryContext : public ClassRegistry<ClassFactoryBase> {};
 
     }
 }
 
-#endif //GAMEO_FACTORY_H
+#endif //HYKR_FACTORY_H

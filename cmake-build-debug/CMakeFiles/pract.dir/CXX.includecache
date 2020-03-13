@@ -6,31 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/hykar/projects/pract/include/base/Class.h
-string
--
-typeindex
--
-memory
--
-compile_time/logical.h
-/home/hykar/projects/pract/include/base/compile_time/logical.h
-
-/home/hykar/projects/pract/include/base/ClassRegistry.h
-Class.h
-/home/hykar/projects/pract/include/base/Class.h
+/home/hykar/projects/pract/include/base/CompileTime.h
 
 /home/hykar/projects/pract/include/base/Factory.h
 unordered_map
 -
 functional
 -
-Class.h
-/home/hykar/projects/pract/include/base/Class.h
-ClassRegistry.h
-/home/hykar/projects/pract/include/base/ClassRegistry.h
+class/Class.h
+/home/hykar/projects/pract/include/base/class/Class.h
+class/ClassRegistry.h
+/home/hykar/projects/pract/include/base/class/ClassRegistry.h
 
-/home/hykar/projects/pract/include/base/compile_time/logical.h
+/home/hykar/projects/pract/include/base/class/Class.h
+string
+-
+typeindex
+-
+memory
+-
+functional
+-
+../CompileTime.h
+/home/hykar/projects/pract/include/base/CompileTime.h
+
+/home/hykar/projects/pract/include/base/class/ClassRegistry.h
+Class.h
+/home/hykar/projects/pract/include/base/class/Class.h
+
+/home/hykar/projects/pract/include/base/stream/Stream.h
 
 /home/hykar/projects/pract/main.cpp
 iostream
@@ -39,8 +43,12 @@ string_view
 -
 string
 -
-include/base/Class.h
-/home/hykar/projects/pract/include/base/Class.h
+include/base/CompileTime.h
+/home/hykar/projects/pract/include/base/CompileTime.h
+include/base/class/Class.h
+/home/hykar/projects/pract/include/base/class/Class.h
 include/base/Factory.h
 /home/hykar/projects/pract/include/base/Factory.h
+include/base/stream/Stream.h
+/home/hykar/projects/pract/include/base/stream/Stream.h
 

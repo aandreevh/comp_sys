@@ -1,11 +1,12 @@
-#ifndef GAMEO_CLASS_H
-#define GAMEO_CLASS_H
+#ifndef HYKR_CLASS_H
+#define HYKR_CLASS_H
 
 #include <string>
 #include <typeindex>
 #include <memory>
+#include <functional>
 
-#include "compile_time/logical.h"
+#include "../CompileTime.h"
 
 namespace base {
 
@@ -23,6 +24,12 @@ inline namespace cls{
         using PtrBase = std::shared_ptr<T>;
         using ClassPtr =  PtrBase<_Base>;
         using TypeInfo = std::type_info;
+
+        template<typename T,typename... _Args>
+        static std::function<PtrBase<T>(_Args...)> PtrInstantiate(){
+            return std::make_shared<T,_Args...>;
+        }
+
         class Type{
         public:
             using Intern = std::type_info;
@@ -30,6 +37,7 @@ inline namespace cls{
 
             using hash = struct{
                 using Wrapper = std::hash<Ident>;
+
                 Wrapper  wrapper;
                 std::size_t operator ()(const Type& type) const{
                     return wrapper(type.ident());
@@ -37,8 +45,7 @@ inline namespace cls{
             };
 
         private:
-            std::size_t _ident;
-
+            Ident _ident;
             constexpr static Ident _map(const Intern& intern){
                 return  intern.hash_code();
             }
@@ -91,8 +98,8 @@ inline namespace cls{
         }
 
         template<typename T = _Base,typename... _Args,typename = typename std::enable_if<_Valid<T>()>::type>
-        static ClassPtr instantiate(_Args&&... args){
-            return std::make_shared<T>(std::forward<_Args>(args)...);
+        static PtrBase<T> instantiate(_Args&&... args){
+            return PtrInstantiate<T,_Args...>()(std::forward<_Args>(args)...);
         }
 
 
@@ -101,4 +108,6 @@ inline namespace cls{
 }
 
 }
-#endif //GAMEO_CLASS_H
+
+
+#endif //HYKR_CLASS_H
