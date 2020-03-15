@@ -31,8 +31,6 @@ namespace base {
             const char *what() const noexcept override {
                 return base();
             }
-
-
         };
 
     private:
@@ -82,7 +80,7 @@ namespace base {
             return add(ClassBase::template type<_Type>(), el);
         }
 
-        virtual ~ClassKeyRegistry() = default;
+        ~ClassKeyRegistry() override = default;
 
     };
 
@@ -93,7 +91,7 @@ namespace base {
         using ClassPtr = typename ClassBase::ClassPtr;
         using Type = typename ClassBase::Type;
     private:
-        using Registry  = ClassKeyRegistry<_Base,ClassPtr>;
+        using Registry  = ClassKeyRegistry<_Base,ClassPtr>; //composition inheritance needed for _Key _El proper binding
         Registry registry;
 
     public:

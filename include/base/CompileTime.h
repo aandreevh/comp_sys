@@ -8,7 +8,7 @@
 
 namespace base{
 
-    inline namespace compile {
+    inline namespace compile { //template programming
 
         template<bool P,bool Q>
         struct _and{
@@ -30,7 +30,7 @@ namespace base{
             static constexpr  bool value = false;
         };
 
-        template<typename... Args>
+        template<typename... Args> //template programming recursion
          struct countArgs {
             static const std::size_t  value = 0;
         };

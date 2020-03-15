@@ -12,25 +12,10 @@ namespace base {
 
 inline namespace cls{
 
-    template<typename _Base = void>
-    class Class {
+    namespace {
 
-    public:
-
-
-        using TrueBase = typename std::conditional<
-                std::is_same<_Base, void>::value, Class<void>, _Base>::type;
-        template<typename T>
-        using PtrBase = std::shared_ptr<T>;
-        using ClassPtr =  PtrBase<_Base>;
-        using TypeInfo = std::type_info;
-
-        template<typename T,typename... _Args>
-        static std::function<PtrBase<T>(_Args...)> PtrInstantiate(){
-            return std::make_shared<T,_Args...>;
-        }
-
-        class Type{
+        template<typename _Base>
+        class _InternType{  //type must be _Base specific for compile time Type mismatch checks
         public:
             using Intern = std::type_info;
             using Ident = std::size_t;
@@ -39,7 +24,7 @@ inline namespace cls{
                 using Wrapper = std::hash<Ident>;
 
                 Wrapper  wrapper;
-                std::size_t operator ()(const Type& type) const{
+                std::size_t operator ()(const _InternType& type) const{
                     return wrapper(type.ident());
                 }
             };
@@ -51,22 +36,41 @@ inline namespace cls{
             }
         public:
 
-            constexpr Type():_ident(Ident()){}
-            constexpr Type(const Intern& info):_ident(_map(info)){}
+            constexpr _InternType():_ident(Ident()){}
+            constexpr _InternType(const Intern& info):_ident(_map(info)){} //intended implicit constructor
 
             constexpr Ident ident()const noexcept {
                 return this->_ident;
             }
 
-            constexpr static Type base() noexcept{
+            constexpr static _InternType<_Base> base() noexcept{
                 return typeid(_Base);
             }
 
-            constexpr bool operator==(const Type& other) const noexcept {
+            constexpr bool operator==(const _InternType& other) const noexcept {
                 return other.ident() == ident();
             }
         };
 
+    }
+
+
+    template<typename _Base = void>
+    class Class {
+
+    public:
+
+
+        using TrueBase = typename std::conditional<
+                std::is_same<_Base, void>::value, Class<void>, _Base>::type;
+        template<typename T>
+        using PtrBase = std::shared_ptr<T>;
+        using ClassPtr =  PtrBase<_Base>;
+        using Type = _InternType<_Base>;
+        template<typename T,typename... _Args>
+        static std::function<PtrBase<T>(_Args...)> PtrInstantiate(){
+            return std::make_shared<T,_Args...>;
+        }
 
     private:
 

@@ -56,11 +56,12 @@ public:
 
 int main(int arg_c, char** arg_v){
 
-    ((TestStream){1,2,3,4}).map<bool>([](int e){
-       return (bool)(e%2 ==0);
-    }).forEach([](bool b){
-        std::cout<<(char)('a'+2*(int)b);
-    });
+    int rand = 2;
+   std::cout<<((TestStream){1,2,3,4}).map<int>([](int e){
+       return e*2;
+    }).foldl<int>([&rand](const int& val,int tot){
+        return tot+val;
+    },0)<<std::endl;
 
     using ComponentFactory = ClassFactory<Component,std::string>;
     using CFP = ClassFactoryBase::PtrBase<ComponentFactory> ;
@@ -68,7 +69,6 @@ int main(int arg_c, char** arg_v){
     FactoryContext fc;
     fc.template operator()<ComponentFactory>();
     CFP factory = fc.get<ComponentFactory>();
-    std::cout<<"Tester"<<std::endl;
 
     factory->add<BasicComponent>([](const std::string& text){
         return Component::instantiate<BasicComponent>(text);
